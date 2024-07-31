@@ -3,6 +3,10 @@ import re
 import time
 from platform import python_version as y
 from sys import argv
+from aiohttp import web
+from plugins import web_server
+import logging
+import pyromod.listen
 
 from pyrogram import __version__ as pyrover
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
@@ -766,6 +770,13 @@ def main():
 
     LOGGER.info("Using long polling.")
     updater.start_polling(timeout=15, read_latency=4, drop_pending_updates=True)
+
+    # web-response
+    app = web.AppRunner(await web_server())
+    await app.setup()
+    bind_address = "0.0.0.0"
+    await web.TCPSite(app, bind_address, 8080).start()
+
 
     if len(argv) not in (1, 3, 4):
         telethn.disconnect()
