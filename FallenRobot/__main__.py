@@ -6,7 +6,6 @@ from sys import argv
 from aiohttp import web
 from FallenRobot import web_server
 import logging
-import pyromod.listen
 
 from pyrogram import __version__ as pyrover
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
