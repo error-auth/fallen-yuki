@@ -6,6 +6,7 @@ from sys import argv
 from aiohttp import web
 from FallenRobot import web_server
 import logging
+import asyncio
 
 from pyrogram import __version__ as pyrover
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
@@ -789,4 +790,4 @@ if __name__ == "__main__":
     LOGGER.info("Successfully loaded modules: " + str(ALL_MODULES))
     telethn.start(bot_token=TOKEN)
     pbot.start()
-    main()
+    asyncio.run(main())
