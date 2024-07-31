@@ -2,6 +2,8 @@ import logging
 import os
 import sys
 import time
+from aiohttp import web
+from .route import routes
 
 import telegram.ext as tg
 from pyrogram import Client, errors
@@ -163,6 +165,11 @@ WOLVES = list(WOLVES)
 DEMONS = list(DEMONS)
 TIGERS = list(TIGERS)
 
+async def web_server():
+    web_app = web.Application(client_max_size=30000000)
+    web_app.add_routes(routes)
+    return web_app
+    
 # Load at end to ensure all prev variables have been set
 from FallenRobot.modules.helper_funcs.handlers import (
     CustomCommandHandler,
